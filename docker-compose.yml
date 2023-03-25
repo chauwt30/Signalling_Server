@@ -1,0 +1,27 @@
+version: '2'
+services:
+  rtc:
+    container_name: rtc-server
+    image: yjs-rtc
+    ports:
+       - '15100:4444'
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.5
+  lite:
+    container_name: jupyter-lite-rtc
+    #image: jupyter-test
+    image: lite-rtc
+    ports:
+      - '18002:8000'
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.6
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1
+
